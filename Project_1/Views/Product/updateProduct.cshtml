@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "updateProduct";
+}
+@{
+    Layout = "~/Views/Shared/ProductLayout.cshtml";
+
+}
+@model List<Project_1.Models.Product>
+<div class="content">
+      <div class="container">
+        <div class="page-header">
+          <h1><font color="green">Update Product to Shopping Store</font></h1>
+        </div>
+        <div class="row">
+          <div class="span6 offset3">
+            <h4 class="widget-header"><i class="icon-lock"></i><font color="blue">Please Update Product Detail</h4>
+            <div class="widget-body">
+              <div class="center-align">
+                <form class="form-horizontal form-signin-signup" action="/Product/doneUpdate" method="post">
+                    <input type="hidden" name="Id" value="@Model[0].Id" />
+                    <input type="hidden" name="ProductImage" value="@Model[0].ProductImage" />
+                 <label  class="col-sm-2 control-label" for="textinput"><font color="lightgreen" size="5">Name:</label>
+
+                 <input type="text" name="ProductName" placeholder="Product Name" required="required" value="@Model[0].ProductName"></br>
+
+                    <label  class="col-sm-2 control-label" for="textinput"><font color="lightgreen" size="5">Price:</label>
+
+                 <input type="text" name="ProductPrice" placeholder="Price" required="required" value="@Model[0].ProductPrice"></br>
+
+                    <label  class="col-sm-2 control-label" for="textinput"><font color="lightgreen" size="5">Catagory:</label>
+
+                 <input type="text" name="ProductCatagery" placeholder="Catagory" required="required" value="@Model[0].ProductCatagery"></br>
+
+         <label  class="col-sm-2 control-label" for="textinput"><font color="lightgreen" size="5">Product Image:</label>
+ <input type="file" value="@Model[0].ProductImage" name="image"/></br>
+                    <div class="pull-right">
+                  <input type="submit" value="Update" class="btn btn-primary btn-large" name="ProductImage"></div>
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+

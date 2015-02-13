@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "chekout";
+}
+@{
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+
+}
+@{
+    int tot = 0;
+    String pna = "";
+}
+@model List<Project_1.Models.Product>
+<div class="row">
+          <div class="span6 offset3">
+            <h4 class="widget-header"><i class="icon-lock"></i><font color="blue">Give Order Details</h4>
+            <div class="widget-body">
+              <div class="center-align">
+                  <div class="form-horizontal form-signin-signup">
+                      @using (Html.BeginForm("placeOrder", "order", FormMethod.Post))
+                      {
+                          <table border="1">
+                            <tr>
+                                <td>Product Name</td>
+                                <td>Product Catagery</td>
+                                <td>Product Price</td>
+
+                            </tr>
+                              
+                          @foreach (var a in Model)
+                          {
+                              <tr>
+                                <td>@a.ProductName</td>
+                                <td>@a.ProductCatagery</td>
+                                <td>@a.ProductPrice</td>
+                                 
+                            </tr>
+                              tot=tot+a.ProductPrice;
+                              if (pna != "")
+                              {
+                                  pna = pna + "," + a.ProductName;
+                              }
+                              else
+                              {
+                                  pna = a.ProductName;
+                              }
+                          }
+                          </table>
+                    <div class="pull-left">Total=@tot</div>
+                   <input type="hidden" name="total" value="@tot" />
+                   <input type="hidden" name="prods" value="@pna" />
+
+                    <div ><input type="text" name="uname" placeholder="Your Name" required="required"></div>
+                    <div ><input type="date" name="d1" placeholder="Dates" required="required"></div>
+
+                    <div class="pull-right">
+                  <input type="submit" value="place Order" class="btn btn-primary btn-large"></div>
+                      }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

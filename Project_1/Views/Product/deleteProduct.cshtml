@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "deleteProduct";
+}
+@{
+    Layout = "~/Views/Shared/ProductLayout.cshtml";
+
+}
+@model List<Project_1.Models.Product>
+<div class="page-header">
+          <h1><font color="green">Delete Product</font></h1>
+</div>
+
+ <div class="row">
+          <div class="span6 offset3">
+            <h4 class="widget-header"><i class="icon-lock"></i><font color="blue">Selete Product To Delete</h4>
+            <div class="widget-body">
+              <div class="center-align">
+                  <div class="form-horizontal form-signin-signup">
+                      @using (Html.BeginForm("delProduct","Product",FormMethod.Post))
+                      {
+                        <select name="pname">
+                        @foreach (var a in Model)
+                        {
+                            <option >@a.ProductName</option>
+                        }
+
+                        </select>
+                    <div class="pull-right">
+                  <input type="submit" value="Delete" class="btn btn-primary btn-large"></div>
+               }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

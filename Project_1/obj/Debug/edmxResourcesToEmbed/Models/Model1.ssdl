@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Database1Model.Store.Account" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="Database1Model.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Product" EntityType="Database1Model.Store.Product" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sale_Purchase" EntityType="Database1Model.Store.Sale_Purchase" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="Database1Model.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Orders_ToTable" Association="Database1Model.Store.FK_Orders_ToTable">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_ToTable" Association="Database1Model.Store.FK_Table_ToTable">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Sale_Purchase" EntitySet="Sale_Purchase" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="AccountHolder" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Balance" Type="int" Nullable="false" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OId" />
+    </Key>
+    <Property Name="OId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Date" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CustomerName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="PurchaseProducts" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductPrice" Type="int" Nullable="false" />
+    <Property Name="ProductCatagery" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ProductImage" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Sale_Purchase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Products" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Owner" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="phoneNo" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Orders_ToTable">
+    <End Role="Users" Type="Database1Model.Store.Users" Multiplicity="1" />
+    <End Role="Orders" Type="Database1Model.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_ToTable">
+    <End Role="Users" Type="Database1Model.Store.Users" Multiplicity="1" />
+    <End Role="Sale_Purchase" Type="Database1Model.Store.Sale_Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Sale_Purchase">
+        <PropertyRef Name="Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

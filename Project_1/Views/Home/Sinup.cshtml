@@ -1,0 +1,111 @@
+﻿@model Project_1.Models.User
+@{
+    ViewBag.Title = "Sinup";
+}
+
+<html>
+    <head>
+    <title>Sign Up</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.min.js"></script>
+        <script src="~/Scripts/jquery-1.7.1.js"></script>  
+        <script src="~/Scripts/bootstrap.js"></script>
+
+        
+        <script>
+            function fun() {
+                
+               //$('#d1').remove();
+                $.getJSON('/Home/CheckUname?u='+$('#t1').val(), function (x) {
+                    if (x)
+                        $('#d1').text("User Name not available");
+                    else
+                        $('#d1').text("User Name available");
+                });
+            }
+        </script>
+</head>
+<body>
+    
+    <div class="jumbotron">
+        <h2>Give Details</h2>
+    </div>
+    <section>
+        <div class="form-horizontal" style="margin-left:50px">
+    <!--<form class="form-horizontal" style="margin-left:50px" action="~/Home/AddUser" method="post">-->
+            @using (Html.BeginForm("AddUser","Home",FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+        <fieldset>
+<div class="form-group">
+    <div class="col-sm-2 control-label"><font color="white">@Html.LabelFor(m => m.Name)</div>
+    <div class="col-sm-2" >
+      @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m=>m.Name)<br/>
+        </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-2 control-label"><font color="white">@Html.LabelFor(m => m.UserName)</div>
+    <div class="col-sm-2">
+      @Html.TextBoxFor(m => m.UserName, new {id="t1"})@Html.ValidationMessageFor(m=>m.UserName)<div id="d1"></div>
+        <div>
+            <button type="button" id="b1" class="btn btn-primary navbar-btn" onclick="fun()" >check Availability</button>
+
+        </div>
+        </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-2 control-label"><font color="white">@Html.LabelFor(m => m.Email)</div>
+    <div class="col-sm-2">
+      @Html.TextBoxFor(m => m.Email)@Html.ValidationMessageFor(m=>m.Email)<br/>
+        </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-2 control-label"><font color="white">@Html.LabelFor(m => m.Address)</div>
+    <div class="col-sm-3">
+      @Html.TextBoxFor(m => m.Address)@Html.ValidationMessageFor(m=>m.Address)<br/>
+        </div>
+  </div>
+            
+    <div class="form-group">
+    <div class="col-sm-2 control-label"><font color="white">@Html.LabelFor(m => m.phoneNo)</div>
+    <div class="col-sm-2">
+      @Html.TextBoxFor(m => m.phoneNo)@Html.ValidationMessageFor(m=>m.phoneNo)<br/>
+        </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-2 control-label"><font color="white">@Html.LabelFor(m => m.password)</div>
+    <div class="col-sm-2">
+      @Html.TextBoxFor(m => m.password, new {type="password"})@Html.ValidationMessageFor(m=>m.password)<br/>
+        </div>
+        </div>
+    <div class="form-group">
+    <label  class="col-sm-2 control-label" for="textinput">Re-Enter Password:</label>
+    <div class="col-sm-2">
+      <input type="password" class="form-control" required="required"/><br/>
+        </div>
+  </div>
+            
+
+        
+
+    <div class="col-lg-12">
+    <div class="jumbotron">
+    <button type="submit" class="btn btn-primary navbar-btn">Save</button>
+    <a href="/Home/Index" >Cancel</a>
+    </div>  
+        </div> 
+           </fieldset>
+       
+            }
+    </div>
+        </section>
+    <div class="col-lg-12">
+    <div class="alert alert-warning">Warning! Fix validation Error and try again
+        </div>
+    </div>
+   
+         
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@model Project_1.Models.Product
+
+@{
+    ViewBag.Title = "AddProduct";
+}
+@{
+    Layout = "~/Views/Shared/ProductLayout.cshtml";
+
+}
+<div class="content">
+      <div class="container">
+        <div class="page-header">
+          <h1><font color="green">Add Product to Shopping Store</font></h1>
+        </div>
+        <div class="row">
+          <div class="span6 offset3">
+            <h4 class="widget-header"><i class="icon-lock"></i><font color="blue">Please Give Product Detail</h4>
+            <div class="widget-body">
+              <div class="center-align">
+                  <div class="form-horizontal form-signin-signup">
+                      @using (Html.BeginForm("addnewProduct", "Product", FormMethod.Post, new {@enctype="multipart/form-data" }))
+                      {
+                            @Html.AntiForgeryToken()
+                             @Html.ValidationSummary(true)
+                <!-- <form class="form-horizontal form-signin-signup" action="/Admin/addProduct" method="post"> -->
+                 <div  class="col-sm-2 control-label"><font color="lightgreen" size="5">@Html.LabelFor(m => m.ProductName)</div>
+                    @Html.TextBoxFor(m => m.ProductName, new { placeholder = "Product NAME" })
+                <!-- <input type="text" name="pname" placeholder="Product Name" required="required">-->
+                      @Html.ValidationMessageFor(m=>m.ProductName)
+                    <div  class="col-sm-2 control-label"><font color="lightgreen" size="5">@Html.LabelFor(m => m.ProductPrice)</div>
+                    @Html.TextBoxFor(m => m.ProductPrice, new { placeholder = "Product price" })
+                                           @Html.ValidationMessageFor(m=>m.ProductPrice)
+
+
+                    <div  class="col-sm-2 control-label"><font color="lightgreen" size="5">@Html.LabelFor(m => m.ProductCatagery)</div>
+                    @Html.TextBoxFor(m => m.ProductCatagery, new { placeholder = "Product Catagery" })
+                     @Html.ValidationMessageFor(m=>m.ProductCatagery)
+
+
+         <div  class="col-sm-2 control-label" ><font color="lightgreen" size="5">@Html.LabelFor(m => m.ProductImage)</font></div>
+                          <!--<div>@Html.TextBoxFor(m => m.ProductImage, new { required = "required", value = "imge" })</div>-->
+ <div ><input type="file" name="image"/></div>
+                    <div class="pull-right">
+                  <input type="submit" value="Add" class="btn btn-primary btn-large"></div>
+                      }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

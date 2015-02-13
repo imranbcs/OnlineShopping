@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "seeDetail";
+}
+@{
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+@model List<Project_1.Models.Product>
+<h2>seeDetail</h2>
+<div align="center">
+    @foreach(var a in Model)
+    {
+<div class="thumbnail">
+                  <img src="~/Image/@a.ProductImage" style="height:150px;width:260px">
+                  <div class="caption">
+                    <h3>@a.ProductName</h3>
+                    <p>
+                      <div>Catogery     @a.ProductCatagery</div>
+                      <div>Price        @a.ProductPrice</div>
+
+                    </p>
+                  </div>
+                  <div class="widget-footer">
+                    <p>
+                      <a href="/customer/addToCart?pname=@a.ProductName" class="btn btn-primary">Add To Chart</a>&nbsp;
+                    </p>
+                  </div>
+                </div>
+    }
+        </div>

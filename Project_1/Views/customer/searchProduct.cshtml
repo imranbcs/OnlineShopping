@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "searchProduct";
+}
+@{
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+@model List<Project_1.Models.Product>
+ <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+     @Scripts.Render("~/bundles/jquery")
+     <script type="text/javascript">
+         $(document).ready(function () {
+             $("#modSelector").change(function () {
+                 var countryId = $("#modSelector").val();
+                 //alert(countryId);
+                 $("#ProductSelctor option").remove();
+
+
+                 $.getJSON("/Product/GetProduct?id=" + countryId, function (data) {
+                     $("#ProductSelctor").append('<option>-Select Product-</option>');
+                     $.each(data, function (i, item) {
+                         $("#ProductSelctor").append('<option value=' + item.ProductName + '>' + item.ProductName + '</option>');
+                         //alert('Id = ' + item.Id + " Name = " + item.Name);
+                     });
+
+                 });
+
+             });
+
+         });
+</script>
+
+<body>
+    <div class="page-header">
+          <h1><font color="green">Search Product</font></h1>
+</div>
+    <div align="center">
+      
+        
+      <font color="blue" size="5">
+
+      <div>
+          <label>Select Catagory</label></div>
+          <div>
+     <select id="modSelector" name="mod">
+  <option value="0">-Select catagory-</option>
+          <option value="mobile">mobile</option>
+      <option value="Laptop">Laptop</option>
+      <option value="camera">camera</option>
+      <option value="usb">Usb</option>
+
+  
+</select>
+       @using (Html.BeginForm("seeDetail","customer", FormMethod.Post))
+      {
+
+             <div>
+      <select id="ProductSelctor" name="pname">
+      
+  
+</select></div><div><input type="submit" value="See Details">
+        </div>
+       }
+          </font>
+        </div>
+    
+</body>
